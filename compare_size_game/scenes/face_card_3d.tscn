@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://csv82tf0ad6ug"]
+
+[ext_resource type="PackedScene" uid="uid://dxpc2iac0hjpw" path="res://addons/card_3d/scenes/card_3d.tscn" id="1_kyi6q"]
+[ext_resource type="Script" path="res://compare_size_game/scripts/face_card_3d.gd" id="2_07ugg"]
+
+[node name="FaceCard3D" instance=ExtResource("1_kyi6q")]
+script = ExtResource("2_07ugg")
+rank = 0
+suit = 0
+front_material_path = ""
+back_material_path = ""
+hover_scale_factor = null
+hover_pos_move = null
+move_tween_duration = null
+rotate_tween_duration = null

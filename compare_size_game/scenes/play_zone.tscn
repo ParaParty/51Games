@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://juaf74hugtwi"]
+
+[ext_resource type="Script" path="res://compare_size_game/scripts/play_zone.gd" id="1_rloyn"]
+[ext_resource type="PackedScene" uid="uid://d1uvcisduvvj" path="res://addons/card_3d/scenes/card_collection_3d.tscn" id="2_wystl"]
+[ext_resource type="Script" path="res://addons/card_3d/scripts/card_layouts/fan_card_layout.gd" id="3_7f100"]
+[ext_resource type="Script" path="res://addons/card_3d/scripts/card_layouts/pile_card_layout.gd" id="4_1d6wk"]
+[ext_resource type="Script" path="res://addons/card_3d/scripts/card_layouts/line_card_layout.gd" id="5_fp2rg"]
+
+[sub_resource type="Resource" id="Resource_pt3ah"]
+script = ExtResource("3_7f100")
+
+[sub_resource type="Resource" id="Resource_bclr8"]
+script = ExtResource("4_1d6wk")
+
+[sub_resource type="Resource" id="Resource_wavtr"]
+script = ExtResource("4_1d6wk")
+
+[sub_resource type="Resource" id="Resource_h7ax4"]
+script = ExtResource("5_fp2rg")
+
+[node name="PlayZone" type="Node3D"]
+script = ExtResource("1_rloyn")
+
+[node name="HandCards" parent="." instance=ExtResource("2_wystl")]
+card_layout_strategy = SubResource("Resource_pt3ah")
+
+[node name="DiscardCards" parent="." instance=ExtResource("2_wystl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
+card_layout_strategy = SubResource("Resource_bclr8")
+
+[node name="DeckCards" parent="." instance=ExtResource("2_wystl")]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 15, 0, 0)
+card_layout_strategy = SubResource("Resource_wavtr")
+
+[node name="TableCards" parent="." instance=ExtResource("2_wystl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+card_layout_strategy = SubResource("Resource_h7ax4")
+
+[node name="DrawCardPositionMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 10, 0)
