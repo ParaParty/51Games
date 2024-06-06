@@ -1,10 +1,11 @@
 extends Node3D
 
-@onready var card_animation = $Card/AnimationPlayer
+@onready var card_animations = [$Card/AnimationPlayer, $Card2/AnimationPlayer]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	card_animation.play("hover")
+	for a in card_animations:
+		a.play("hover")
 	pass
 
 

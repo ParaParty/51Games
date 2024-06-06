@@ -109,6 +109,21 @@ libraries = {
 "": SubResource("AnimationLibrary_5fr0q")
 }
 
+[node name="Card2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1.41421, -1.41421, 6.18172e-08, 0, -8.74228e-08, -2, 1.41421, 1.41421, -6.18172e-08, -2.6, 10.6, -6.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Card2"]
+shape = SubResource("BoxShape3D_vrpph")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Card2"]
+mesh = SubResource("PlaneMesh_swqoo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Card2"]
+root_node = NodePath("../MeshInstance3D")
+libraries = {
+"": SubResource("AnimationLibrary_5fr0q")
+}
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, 0.353553, -0.353553, 0, 0.707107, 0.707107, 0.5, -0.612372, 0.612372, -12, 12, 0)
 shadow_enabled = true
