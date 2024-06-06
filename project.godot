@@ -18,7 +18,12 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 
 window/stretch/mode="viewport"
 
+[gui]
+
+theme/custom_font="res://assets/MiSans-Normal.ttf"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
