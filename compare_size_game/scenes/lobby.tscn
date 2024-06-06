@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cebn43o2r7xaq"]
+[gd_scene load_steps=11 format=3 uid="uid://cebn43o2r7xaq"]
 
 [ext_resource type="Script" path="res://compare_size_game/scripts/lobby.gd" id="1_yta84"]
 [ext_resource type="Material" uid="uid://bqro4hftxnor7" path="res://materials/card_3d/diamond-13.tres" id="2_naefa"]
@@ -42,6 +42,10 @@ _data = {
 "RESET": SubResource("Animation_7ktgb"),
 "hover": SubResource("Animation_nyjwl")
 }
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_irlxy"]
+material = ExtResource("2_naefa")
+size = Vector2(3, 6)
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_yta84")
@@ -110,13 +114,13 @@ libraries = {
 }
 
 [node name="Card2" type="CharacterBody3D" parent="."]
-transform = Transform3D(1.41421, -1.41421, 6.18172e-08, 0, -8.74228e-08, -2, 1.41421, 1.41421, -6.18172e-08, -2.6, 10.6, -6.6)
+transform = Transform3D(1.41421, -1.41421, 6.18172e-08, 0, -8.74228e-08, -2, 1.41421, 1.41421, -6.18172e-08, -2.6, 10.6, -6.8)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Card2"]
 shape = SubResource("BoxShape3D_vrpph")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Card2"]
-mesh = SubResource("PlaneMesh_swqoo")
+mesh = SubResource("PlaneMesh_irlxy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Card2"]
 root_node = NodePath("../MeshInstance3D")

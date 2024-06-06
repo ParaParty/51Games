@@ -1,13 +1,24 @@
 extends Node3D
 
-@onready var card_animations = [$Card/AnimationPlayer, $Card2/AnimationPlayer]
+@onready var cards = [$Card, $Card2]
 
-# Called when the node enters the scene tree for the first time.
+var suits = ["club", "diamond", "heart", "spade"]
+var ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+
 func _ready():
-	for a in card_animations:
-		a.play("hover")
-	pass
-
+	for card in cards:
+		randomize()
+		card.get_node("AnimationPlayer").play("hover")
+		var mesh_instance = card.get_node("MeshInstance3D")
+		var random_suit = suits[randi() % suits.size()]
+		var random_rank = ranks[randi() % ranks.size()]
+		var material_path = "res://materials/card_3d/%s-%s.tres" % [random_suit, random_rank]
+		var new_material = load(material_path)
+		if new_material != null:
+			print("Using %s for card %s" % [material_path, card])
+			mesh_instance.mesh.surface_set_material(0, new_material)
+		else:
+			print("Failed to load material: ", material_path)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
