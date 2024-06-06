@@ -14,6 +14,10 @@ config/name="51Games"
 run/main_scene="res://compare_size_game/scenes/lobby.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
+[display]
+
+window/stretch/mode="viewport"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
