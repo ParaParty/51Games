@@ -85,6 +85,7 @@ func settle_round():
 	var hud = get_parent().find_child("HUD");
 	var label = Label.new()
 	label.global_position = hud.find_child("WinFailIndicatorLocationMarker").global_position
+	label.add_theme_font_size_override("font_size", 20)
 		
 	if local_table_card["rank"] > remote_table_card["rank"]:
 		local_score += 1;
@@ -110,4 +111,22 @@ func settle_round():
 		settle_game()
 	
 func settle_game():
-	get_tree().reload_current_scene()
+	var hud = get_parent().find_child("HUD");
+	hud.visible = false
+	
+	var gui = get_parent().find_child("GUI")
+	
+	var win_fail_label = gui.find_child("WinFailLabel")
+	if local_score > remote_score:
+		win_fail_label.text = "👑胜利👑"
+	elif local_score < remote_score:
+		win_fail_label.text = "失败..."
+	else: 
+		win_fail_label.text = "平局"
+		
+	var local_user_score = gui.find_child("LocalUserScore")
+	local_user_score.text = str(local_score)
+	var remote_user_score = gui.find_child("RemoteUserScore")
+	remote_user_score.text = str(remote_score)
+		
+	gui.visible = true

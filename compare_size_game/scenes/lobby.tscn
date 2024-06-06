@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://cebn43o2r7xaq"]
+
+[ext_resource type="Script" path="res://compare_size_game/scripts/lobby.gd" id="1_yta84"]
+[ext_resource type="Material" uid="uid://bqro4hftxnor7" path="res://materials/card_3d/diamond-13.tres" id="2_naefa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk7n8"]
+albedo_color = Color(0.364706, 0.752941, 0.698039, 1)
+roughness = 0.3
+emission_energy_multiplier = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p767d"]
+material = SubResource("StandardMaterial3D_bk7n8")
+size = Vector2(100, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vrpph"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_swqoo"]
+material = ExtResource("2_naefa")
+size = Vector2(3, 6)
+
+[sub_resource type="Animation" id="Animation_7ktgb"]
+length = 0.001
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_nyjwl"]
+resource_name = "hover"
+length = 2.2
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5fr0q"]
+_data = {
+"RESET": SubResource("Animation_7ktgb"),
+"hover": SubResource("Animation_nyjwl")
+}
+
+[node name="Lobby" type="Node3D"]
+script = ExtResource("1_yta84")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 50
+text = "比大小"
+vertical_alignment = 1
+
+[node name="PlaySingleplayerGame" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 384.0
+offset_right = 1056.0
+offset_bottom = 448.0
+theme_override_font_sizes/font_size = 25
+text = "单人游戏"
+
+[node name="PlayMultiplayerGame" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 472.0
+offset_right = 1056.0
+offset_bottom = 536.0
+theme_override_font_sizes/font_size = 25
+disabled = true
+text = "多人游戏"
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="Surface" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_p767d")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 15, 17)
+size = 50.0
+
+[node name="Card" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.71788, 8.64)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Card"]
+shape = SubResource("BoxShape3D_vrpph")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Card"]
+transform = Transform3D(0.866025, -0.482963, -0.12941, 0, 0.258819, -0.965926, 0.5, 0.836516, 0.224144, 0, 0, 0)
+mesh = SubResource("PlaneMesh_swqoo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Card"]
+root_node = NodePath("../MeshInstance3D")
+libraries = {
+"": SubResource("AnimationLibrary_5fr0q")
+}
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.958208, -0.0100636, -0.285896, 0.284584, 0.135377, 0.949044, 0.0291529, -0.990743, 0.132583, 13.3013, 7.82626, 0)
+shadow_enabled = true
+shadow_opacity = 0.2
+
+[connection signal="pressed" from="Control/PlaySingleplayerGame" to="." method="_on_play_singleplayer_game_pressed"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="51Games"
-run/main_scene="res://compare_size_game/scenes/compare_size_game.tscn"
+run/main_scene="res://compare_size_game/scenes/lobby.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [rendering]

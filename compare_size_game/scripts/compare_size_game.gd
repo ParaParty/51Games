@@ -7,22 +7,14 @@ extends Node3D
 func _ready():
 	manager.initialize(local, remote)
 	start_game()
-
-
-func _process(delta):
-	pass
 	
 
 func start_game():
 	manager.run()
 	
 	
-func pause_game():
-	pass
-	
-	
 func end_game():
-	pass
+	get_tree().change_scene_to_file("res://compare_size_game/scenes/lobby.tscn")
 	
 
 func _on_local_play_zone_acquire_draw_card():
@@ -37,3 +29,7 @@ func _on_local_play_zone_player_play_card(card):
 
 func _on_remote_play_zone_acquire_draw_card():
 	manager.draw_card_for_remote()
+
+
+func _on_back_to_lobby_button_pressed():
+	end_game()
