@@ -1,0 +1,39 @@
+51games.minecraft.kim {
+    root * /srv
+    file_server
+    encode gzip zstd
+    try_files {path} {path}/ /51games.html /index.html
+
+    header {
+        Cross-Origin-Embedder-Policy "require-corp"
+        Cross-Origin-Opener-Policy "same-origin"
+    }
+
+    @matchJs {
+        path *.js
+    }
+    header @matchJs {
+        Content-Type text/javascript
+    }
+
+    @matchPck {
+        path *.pck
+    }
+    header @matchPck {
+        Content-Type application/octet-stream
+    }
+
+    @matchWasm {
+        path *.wasm
+    }
+    header @matchWasm {
+        Content-Type application/wasm
+    }
+
+    @matchHtml {
+        path *.html
+    }
+    header @matchHtml {
+        Content-Type text/html
+    }
+}
